@@ -123,40 +123,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
-
 {
   data: function data() {
     return {
-      trailerList: [] };
+      trailerList: [],
+      keywords: "", //搜索关键字
+      page: 1, //当前第几页
+      totalPages: 1, //总页数
+      pageSize: 15 };
 
   },
-  onLoad: function onLoad() {var _this = this;
-    uni.showLoading({
-      title: '搜索中',
-      mask: false });
-
-    uni.showNavigationBarLoading();
-    uni.request({
-      url: this.serverURL + '/search/list?qq=843002185&page=&pageSize=&keywords=',
-      method: 'POST',
-      data: {},
-
-      success: function success(res) {
-        if (res.data.status == 200) {
-          _this.trailerList = res.data.data.rows;
-        }
-      },
-      fail: function fail() {},
-      complete: function complete() {
-        uni.hideNavigationBarLoading();
-        uni.hideLoading();
-      } });
-
+  onLoad: function onLoad() {
+    var me = this;
+    me.pagedTrailerList(me.keywords, me.page, me.pageSize);
   },
-  methods: {} };exports.default = _default;
+  onReachBottom: function onReachBottom() {
+    var me = this;
+    var page = me.page + 1;
+    var keywords = me.keywords;
+    var totalPages = me.totalPages;
+    //如果当前分页大于等于总页数
+    if (page > totalPages) {
+      console.log("到达最后一页");
+      return;
+    }
+    me.pagedTrailerList(keywords, page, me.pageSize);
+  },
+  methods: {
+    pagedTrailerList: function pagedTrailerList(keywords, page, pageSize) {
+      var me = this;
+      uni.showLoading({
+        title: '搜索中',
+        mask: false });
+
+      uni.showNavigationBarLoading();
+      uni.request({
+        url: me.serverURL + '/search/list?qq=843002185&page=' + page + '&pageSize=' + pageSize +
+        '&keywords=' + keywords,
+        method: 'POST',
+        data: {},
+        success: function success(res) {
+          if (res.data.status == 200) {
+            var tempList = res.data.data.rows;
+            me.trailerList = me.trailerList.concat(tempList);
+            me.totalPages = res.data.data.total;
+            me.page = page;
+          }
+        },
+        fail: function fail() {},
+        complete: function complete() {
+          uni.hideNavigationBarLoading();
+          uni.hideLoading();
+        } });
+
+    },
+    searchme: function searchme(e) {
+      var me = this;
+      //获取搜索的内容
+      var value = e.detail.value;
+      me.keywords = value;
+      me.trailerList = [];
+      var page = 1;
+      me.pagedTrailerList(me.keywords, page, me.pageSize);
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

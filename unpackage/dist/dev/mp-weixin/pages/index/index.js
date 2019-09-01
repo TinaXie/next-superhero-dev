@@ -213,58 +213,58 @@ var animation = uni.createAnimation();var _default =
 
   },
 
-  onLoad: function onLoad() {var _this = this;
+  onLoad: function onLoad() {
+    var me = this;
     //请求轮播图数据
     uni.request({
-      url: this.serverURL + '/index/carousel/list?&qq=843002185',
+      url: me.serverURL + '/index/carousel/list?&qq=843002185',
       method: "POST",
       success: function success(res) {
         if (res.data.status == 200) {
           var carouselList = res.data.data;
-          _this.carouselList = carouselList;
+          me.carouselList = carouselList;
         }
       } });
 
 
     //请求热门超英
     uni.request({
-      url: this.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
+      url: me.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
       method: "POST",
       success: function success(res) {
         if (res.data.status == 200) {
-          _this.hotSuperHeroList = res.data.data;
+          me.hotSuperHeroList = res.data.data;
         }
       } });
 
     //请求热门预告
     uni.request({
-      url: this.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
+      url: me.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
       method: "POST",
       success: function success(res) {
         if (res.data.status == 200) {
-          _this.hotTrailerList = res.data.data;
+          me.hotTrailerList = res.data.data;
         }
       } });
 
-    console.log("refresh 1");
-
-    this.refresh();
+    me.refresh();
   },
   onUnload: function onUnload() {
     //页面卸载的时候 清除数据
-    this.animationData = {};
-    this.animationDataArr = [{}, {}, {}, {}, {}];
+    me.animationData = {};
+    me.animationDataArr = [{}, {}, {}, {}, {}];
   },
 
   //下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
-    this.refresh();
+    me.refresh();
   },
   onShow: function onShow() {
 
   },
   methods: {
-    refresh: function refresh() {var _this2 = this;
+    refresh: function refresh() {
+      var me = this;
       //页面显示加载
       uni.showLoading({
         mask: true //是否屏蔽页面点击
@@ -276,11 +276,11 @@ var animation = uni.createAnimation();var _default =
       //请求猜你喜欢
       console.log("refresh 2");
       uni.request({
-        url: this.serverURL + '/index/guessULike?qq=843002185',
+        url: me.serverURL + '/index/guessULike?qq=843002185',
         method: "POST",
         success: function success(res) {
           if (res.data.status == 200) {
-            _this2.guessULikeList = res.data.data;
+            me.guessULikeList = res.data.data;
           }
         },
         complete: function complete() {
@@ -293,6 +293,7 @@ var animation = uni.createAnimation();var _default =
 
     },
     pariseMe: function pariseMe(e) {
+      var me = this;
 
       var gIndex = e.currentTarget.dataset.gindex;
 
@@ -300,15 +301,15 @@ var animation = uni.createAnimation();var _default =
       animation.translateY(-60).opacity(1).step({
         duration: 400 });
 
-      this.animationData = animation;
-      this.animationDataArr[gIndex] = animation.export();
+      me.animationData = animation;
+      me.animationDataArr[gIndex] = animation.export();
       setTimeout(function () {
         animation.translateY(0).opacity(0).step({
           duration: 0 });
 
-        this.animationData = animation;
-        this.animationDataArr[gIndex] = animation.export();
-      }.bind(this), 600); // 5秒
+        me.animationData = animation;
+        me.animationDataArr[gIndex] = animation.export();
+      }.bind(me), 600); // 5秒
 
 
     } },

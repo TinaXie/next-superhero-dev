@@ -100,57 +100,57 @@
 		},
 
 		onLoad() {
+			var me = this;
 			//请求轮播图数据
 			uni.request({
-				url: this.serverURL + '/index/carousel/list?&qq=843002185',
+				url: me.serverURL + '/index/carousel/list?&qq=843002185',
 				method: "POST",
 				success: (res) => {
 					if (res.data.status == 200) {
 						var carouselList = res.data.data;
-						this.carouselList = carouselList;
+						me.carouselList = carouselList;
 					}
 				}
 			});
 
 			//请求热门超英
 			uni.request({
-				url: this.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
+				url: me.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
 				method: "POST",
 				success: (res) => {
 					if (res.data.status == 200) {
-						this.hotSuperHeroList = res.data.data;
+						me.hotSuperHeroList = res.data.data;
 					}
 				}
 			});
 			//请求热门预告
 			uni.request({
-				url: this.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
+				url: me.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
 				method: "POST",
 				success: (res) => {
 					if (res.data.status == 200) {
-						this.hotTrailerList = res.data.data;
+						me.hotTrailerList = res.data.data;
 					}
 				}
-			});
-			console.log("refresh 1");
-			
-			this.refresh();
+			});			
+			me.refresh();
 		},
 		onUnload() {
 			//页面卸载的时候 清除数据
-			this.animationData = {};
-			this.animationDataArr = [{}, {}, {}, {}, {}];
+			me.animationData = {};
+			me.animationDataArr = [{}, {}, {}, {}, {}];
 		},
 		
 		//下拉刷新
 		onPullDownRefresh() {
-			this.refresh();
+			me.refresh();
 		},
 		onShow() {
 
 		},
 		methods: {
 			refresh(){
+				var me = this;
 				//页面显示加载
 				uni.showLoading({
 					mask:true,//是否屏蔽页面点击
@@ -162,11 +162,11 @@
 				//请求猜你喜欢
 				console.log("refresh 2");
 				uni.request({
-					url:this.serverURL + '/index/guessULike?qq=843002185',
+					url:me.serverURL + '/index/guessULike?qq=843002185',
 					method:"POST",
 					success: (res) => {
 						if (res.data.status == 200) {
-							this.guessULikeList = res.data.data;
+							me.guessULikeList = res.data.data;
 						}
 					},
 					complete() {
@@ -179,6 +179,7 @@
 				})
 			},
 			pariseMe(e) {
+				var me = this;
 				// #ifdef APP-PLUS || MP-WEIXIN
 				var gIndex = e.currentTarget.dataset.gindex;
 				
@@ -186,15 +187,15 @@
 				animation.translateY(-60).opacity(1).step({
 					duration: 400
 				});
-				this.animationData = animation;
-				this.animationDataArr[gIndex] = animation.export();
+				me.animationData = animation;
+				me.animationDataArr[gIndex] = animation.export();
 				setTimeout(function() {
 					animation.translateY(0).opacity(0).step({
 						duration: 0
 					});
-					this.animationData = animation;
-					this.animationDataArr[gIndex] = animation.export();
-				}.bind(this), 600); // 5秒
+					me.animationData = animation;
+					me.animationDataArr[gIndex] = animation.export();
+				}.bind(me), 600); // 5秒
 				// #endif
 				
 			}
