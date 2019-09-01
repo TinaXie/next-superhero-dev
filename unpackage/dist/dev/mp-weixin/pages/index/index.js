@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var trailerStarts = function trailerStarts() {return __webpack_require__.e(/*! import() | components/trailerStars */ "components/trailerStars").then(__webpack_require__.bind(null, /*! ../../components/trailerStars.vue */ 31));};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var trailerStarts = function trailerStarts() {return __webpack_require__.e(/*! import() | components/trailerStars */ "components/trailerStars").then(__webpack_require__.bind(null, /*! ../../components/trailerStars.vue */ 33));};
 
 
 
@@ -212,11 +212,6 @@ var animation = uni.createAnimation();var _default =
       indicatoractivecolor: "rgb(255, 255, 255, 0.5)" };
 
   },
-  onUnload: function onUnload() {
-    //页面卸载的时候 清除数据
-    this.animationData = {};
-    this.animationDataArr = [{}, {}, {}, {}, {}];
-  },
 
   onLoad: function onLoad() {var _this = this;
     //请求轮播图数据
@@ -251,21 +246,52 @@ var animation = uni.createAnimation();var _default =
         }
       } });
 
-    //请求猜你喜欢
-    uni.request({
-      url: this.serverURL + '/index/guessULike?qq=843002185',
-      method: "POST",
-      success: function success(res) {
-        if (res.data.status == 200) {
-          _this.guessULikeList = res.data.data;
-        }
-      } });
+    console.log("refresh 1");
 
+    this.refresh();
+  },
+  onUnload: function onUnload() {
+    //页面卸载的时候 清除数据
+    this.animationData = {};
+    this.animationDataArr = [{}, {}, {}, {}, {}];
+  },
+
+  //下拉刷新
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.refresh();
   },
   onShow: function onShow() {
 
   },
   methods: {
+    refresh: function refresh() {var _this2 = this;
+      //页面显示加载
+      uni.showLoading({
+        mask: true //是否屏蔽页面点击
+      });
+
+      //navigationbar 显示加载
+      uni.showNavigationBarLoading();
+
+      //请求猜你喜欢
+      console.log("refresh 2");
+      uni.request({
+        url: this.serverURL + '/index/guessULike?qq=843002185',
+        method: "POST",
+        success: function success(res) {
+          if (res.data.status == 200) {
+            _this2.guessULikeList = res.data.data;
+          }
+        },
+        complete: function complete() {
+          //隐藏刷新
+          uni.hideNavigationBarLoading();
+          uni.hideLoading();
+          //加载完成后结束下拉刷新
+          uni.stopPullDownRefresh();
+        } });
+
+    },
     pariseMe: function pariseMe(e) {
 
       var gIndex = e.currentTarget.dataset.gindex;

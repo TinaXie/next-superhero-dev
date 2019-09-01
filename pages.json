@@ -5,11 +5,15 @@
 			"style": {
 				"app-plus": {
 					"titleNView": false //禁用原生导航栏
-				}
+				},
+				"enablePullDownRefresh":true//页面开启下拉刷新功能
+				
 			}
 		}, {
 			"path": "pages/search/search",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "搜索预告片"
+			}
 		}, {
 			"path": "pages/me/me",
 			"style": {}

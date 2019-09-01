@@ -98,11 +98,6 @@
 				indicatoractivecolor: "rgb(255, 255, 255, 0.5)"
 			}
 		},
-		onUnload() {
-			//页面卸载的时候 清除数据
-			this.animationData = {};
-			this.animationDataArr = [{}, {}, {}, {}, {}];
-		},
 
 		onLoad() {
 			//请求轮播图数据
@@ -137,21 +132,52 @@
 					}
 				}
 			});
-			//请求猜你喜欢
-			uni.request({
-				url:this.serverURL + '/index/guessULike?qq=843002185',
-				method:"POST",
-				success: (res) => {
-					if (res.data.status == 200) {
-						this.guessULikeList = res.data.data;
-					}
-				}
-			})
+			console.log("refresh 1");
+			
+			this.refresh();
+		},
+		onUnload() {
+			//页面卸载的时候 清除数据
+			this.animationData = {};
+			this.animationDataArr = [{}, {}, {}, {}, {}];
+		},
+		
+		//下拉刷新
+		onPullDownRefresh() {
+			this.refresh();
 		},
 		onShow() {
 
 		},
 		methods: {
+			refresh(){
+				//页面显示加载
+				uni.showLoading({
+					mask:true,//是否屏蔽页面点击
+				});
+				
+				//navigationbar 显示加载
+				uni.showNavigationBarLoading();
+				
+				//请求猜你喜欢
+				console.log("refresh 2");
+				uni.request({
+					url:this.serverURL + '/index/guessULike?qq=843002185',
+					method:"POST",
+					success: (res) => {
+						if (res.data.status == 200) {
+							this.guessULikeList = res.data.data;
+						}
+					},
+					complete() {
+						//隐藏刷新
+						uni.hideNavigationBarLoading();
+						uni.hideLoading();
+						//加载完成后结束下拉刷新
+						uni.stopPullDownRefresh();
+					}
+				})
+			},
 			pariseMe(e) {
 				// #ifdef APP-PLUS || MP-WEIXIN
 				var gIndex = e.currentTarget.dataset.gindex;
