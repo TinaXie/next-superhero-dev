@@ -3,7 +3,10 @@
 		<!-- 轮播图 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :indicator-active-color="indicatoractivecolor" class="carousel">
 			<swiper-item v-for="carousel in carouselList">
-				<image :src="carousel.image" class="carousel"></image>
+				<navigator open-type="navigate" :url="'../movie/movie?trailerId=' + carousel.movieId">
+					<image :src="carousel.image"
+					 class="carousel"></image>
+				</navigator>
 			</swiper-item>
 		</swiper>
 		<!-- 热门超英 -->
@@ -19,7 +22,9 @@
 		<scroll-view scroll-x="true" class="page-block hot">
 			<view class="single-poster" v-for="superHero in hotSuperHeroList">
 				<view class="poster-wapper">
-					<image :src="superHero.cover" class="poster"></image>
+					<navigator open-type="navigate" :url="'../movie/movie?trailerId=' + superHero.id">
+						<image :src="superHero.cover" class="poster"></image>
+					</navigator>
 					<view class="movie-name">{{superHero.name}}</view>
 					<trailer-starts :innerScore="superHero.score" showNum="1"></trailer-starts>
 				</view>
@@ -49,7 +54,9 @@
 		</view>
 		<view class="page-block guess-u-like">
 			<view class="single-like-movie" v-for="(guess, gIndex) in guessULikeList">
-				<image :src="guess.cover" class="like-movie"></image>
+				<navigator open-type="navigate" :url="'../movie/movie?trailerId=' + guess.id">
+					<image :src="guess.cover" class="like-movie"></image>
+				</navigator>
 				<view class="movie-desc">
 					<view class="movie-title">
 						{{guess.name}}

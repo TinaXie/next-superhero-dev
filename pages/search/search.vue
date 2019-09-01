@@ -8,7 +8,10 @@
 		</view>
 		<view class="movie-list page-block">
 			<view class="movie-wapper" v-for="trailer in trailerList">
-				<image :src="trailer.cover" class="poster">
+				<image :src="trailer.cover"
+				 class="poster"
+				 :data-trailerID="trailer.id"
+				 @click="showTrailer">
 
 				</image>
 			</view>
@@ -79,6 +82,13 @@
 				me.trailerList = [];
 				var page = 1;
 				me.pagedTrailerList(me.keywords, page, me.pageSize);
+			},
+			showTrailer(e){
+				var me = this;
+				var trailerId = e.currentTarget.dataset.trailerid;
+				uni.navigateTo({
+					url:"../movie/movie?trailerId="+trailerId
+				});
 			}
 		}
 	}
