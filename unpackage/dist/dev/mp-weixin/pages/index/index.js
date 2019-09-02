@@ -202,6 +202,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 //在页面创建的时候 创建一个临时动画对象
 var animation = uni.createAnimation();var _default =
 
@@ -214,7 +221,6 @@ var animation = uni.createAnimation();var _default =
       hotTrailerList: [],
       guessULikeList: [],
       animationData: {},
-
       animationDataArr: [{}, {}, {}, {}, {}],
       indicatoractivecolor: "rgb(255, 255, 255, 0.5)" };
 
@@ -269,6 +275,12 @@ var animation = uni.createAnimation();var _default =
   onShow: function onShow() {
 
   },
+  onHide: function onHide() {
+    if (this.videoContext) {
+      this.videoContext.pause();
+      console.log("离开页面 停止播放");
+    }
+  },
   methods: {
     refresh: function refresh() {
       var me = this;
@@ -281,7 +293,6 @@ var animation = uni.createAnimation();var _default =
       uni.showNavigationBarLoading();
 
       //请求猜你喜欢
-      console.log("refresh 2");
       uni.request({
         url: me.serverURL + '/index/guessULike?qq=843002185',
         method: "POST",
@@ -319,6 +330,22 @@ var animation = uni.createAnimation();var _default =
       }.bind(me), 600); // 5秒
 
 
+    },
+    meIsPlay: function meIsPlay(e) {
+      var me = this;
+      var trailerId = "";
+      if (e) {
+        trailerId = e.currentTarget.dataset.playindex;
+        me.videoContext = uni.createVideoContext(trailerId);
+      }
+      var hotTrailerList = me.hotTrailerList;
+
+      for (var i = 0; i < hotTrailerList.length; i++) {
+        var tmpID = hotTrailerList[i].id;
+        if (tmpID != trailerId) {
+          uni.createVideoContext(tmpID).pause();
+        }
+      }
     } },
 
   components: {

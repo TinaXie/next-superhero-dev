@@ -188,18 +188,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 {
   data: function data() {
     return {
@@ -208,6 +196,20 @@ __webpack_require__.r(__webpack_exports__);
       directorArray: [], //导演列表
       actorArray: [] //演员列表
     };
+  },
+
+  onReady: function onReady() {
+    this.videoContext = uni.createVideoContext('myTrailer');
+
+  },
+  onHide: function onHide() {
+    //页面被隐藏的时候，暂停播放
+    this.videoContext.pause();
+  },
+  onShow: function onShow() {
+    if (this.videoContext) {
+      this.videoContext.play();
+    }
   },
   onLoad: function onLoad(params) {
     var me = this;
@@ -264,6 +266,30 @@ __webpack_require__.r(__webpack_exports__);
 
   },
 
+  //监听导航栏的按钮
+  onNavigationBarButtonTap: function onNavigationBarButtonTap(e) {
+    var me = _this;
+    var index = e.index;
+    console.log("tap button:" + index);
+    var trialerInfo = me.trailerInfo;
+    var trailderID = trialerInfo.id;
+    var trailerName = trialerInfo.name;
+    var cover = trailerInfo.cover;
+    var poster = trailerInfo.poster;
+    var desc = trailerInfo.plotDesc;
+    uni.share({
+      provider: "weixin",
+      scene: "WXSenceTimeline",
+      type: 0,
+      href: "http://www.imovietrailer.com/#/pages/movie/movie?trailerId=" + trailderID,
+      title: trailerName,
+      summary: desc,
+      imageUrl: cover,
+      success: function success(res) {
+        console.log("分享成功" + res);
+      } });
+
+  },
   //只支持在小程序端，分享到微信群或者微信好友
   onShareAppMessage: function onShareAppMessage(res) {
     var me = _this;

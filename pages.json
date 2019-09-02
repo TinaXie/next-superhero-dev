@@ -24,8 +24,18 @@
 					"titleNView": {
 						// 渐进式的导航栏
 						"type": "transparent",
-						"backgroundColor":"#000000",
-						"titleColor":"#FFFFFF"
+						//定义导航栏按钮
+						"buttons":[
+							{
+								"type":"home"
+								
+							},
+							{
+								"type":"share"
+								
+							}
+						]
+						
 					}
 				},
 				"navigationBarTitleText":"电影",

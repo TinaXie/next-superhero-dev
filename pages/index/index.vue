@@ -40,8 +40,15 @@
 			</view>
 		</view>
 		<view class="hot-movies page-block">
-			<video v-for="trailer in hotTrailerList" :src="trailer.trailer" :poster="trailer.poster" class="hot-movie-single"
-			 controls></video>
+			<video 
+			:id="trailer.id"
+			:data-playIndex="trailer.id"
+			@play="meIsPlay"
+			v-for="trailer in hotTrailerList" 
+			:src="trailer.trailer"
+			:poster="trailer.poster"
+			class="hot-movie-single"
+			controls></video>
 		</view>
 		<!-- 猜你喜欢 -->
 		<view class="page-block super-hot">
@@ -100,7 +107,6 @@
 				hotTrailerList: [],
 				guessULikeList:[],
 				animationData: {},
-				
 				animationDataArr:[{}, {}, {}, {}, {}],
 				indicatoractivecolor: "rgb(255, 255, 255, 0.5)"
 			}
@@ -155,6 +161,12 @@
 		onShow() {
 
 		},
+		onHide() {
+			if (this.videoContext) {
+				this.videoContext.pause();
+				console.log("离开页面 停止播放");
+			}
+		},
 		methods: {
 			refresh(){
 				var me = this;
@@ -167,7 +179,6 @@
 				uni.showNavigationBarLoading();
 				
 				//请求猜你喜欢
-				console.log("refresh 2");
 				uni.request({
 					url:me.serverURL + '/index/guessULike?qq=843002185',
 					method:"POST",
@@ -205,6 +216,22 @@
 				}.bind(me), 600); // 5秒
 				// #endif
 				
+			},
+			meIsPlay(e) {
+				var me = this;
+				var trailerId = "";
+				if (e) {
+					trailerId = e.currentTarget.dataset.playindex;
+					me.videoContext = uni.createVideoContext(trailerId);
+				}
+				var hotTrailerList = me.hotTrailerList;
+				
+				for (var i = 0; i < hotTrailerList.length; i++) {
+					var tmpID = hotTrailerList[i].id;
+					if (tmpID != trailerId) {
+						uni.createVideoContext(tmpID).pause();
+					}
+				}
 			}
 		},
 		components: {

@@ -1,14 +1,15 @@
 <template>
 	<view class="page">
 		<view class="player">
-			<video :src="trailerInfo.trailer" :poster="trailerInfo.poster" class="movie" controls></video>
+			<video id="myTrailer"
+			 :src="trailerInfo.trailer" 
+			 :poster="trailerInfo.poster" 
+			 class="movie" controls></video>
 		</view>
 		<!-- 基本信息 -->
 		<view class="movie-info">
 			<navigator :url="'../cover/cover?cover='+trailerInfo.cover">
-				<image :src="trailerInfo.cover"
-				 mode="aspectFit" 
-				 class="cover"></image>
+				<image :src="trailerInfo.cover" mode="aspectFit" class="cover"></image>
 			</navigator>
 			<view class="movie-desc">
 				<view class="title">{{trailerInfo.name}}</view>
@@ -49,23 +50,14 @@
 		<view class="scroll-block">
 			<view class="plots-title">演职人员</view>
 			<scroll-view scroll-x class="scroll-list">
-				<view class="actor-wapper"
-				 v-for="(director, staffIndex) in directorArray">
-					<image :src="director.photo"
-					 mode="aspectFit"
-					  class="single-actor"
-					  :data-staffIndex="staffIndex"
-					  @click="lookStaffs"></image>
+				<view class="actor-wapper" v-for="(director, staffIndex) in directorArray">
+					<image :src="director.photo" mode="aspectFit" class="single-actor" :data-staffIndex="staffIndex" @click="lookStaffs"></image>
 					<view class="actor-name">{{director.name}}</view>
 					<view class="actor-role">{{director.actName}}</view>
 				</view>
-				<view class="actor-wapper"
-				 v-for="(actor, actorIndex) in actorArray">
-					<image :src="actor.photo" 
-					mode="aspectFit"
-					 class="single-actor"
-					  :data-staffIndex="actorIndex + directorArray.length"
-					  @click="lookStaffs"></image>
+				<view class="actor-wapper" v-for="(actor, actorIndex) in actorArray">
+					<image :src="actor.photo" mode="aspectFit" class="single-actor" :data-staffIndex="actorIndex + directorArray.length"
+					 @click="lookStaffs"></image>
 					<view class="actor-name">{{actor.name}}</view>
 					<view class="actor-role">{{actor.actName}}</view>
 				</view>
@@ -78,11 +70,7 @@
 		<view class="scroll-block">
 			<view class="plots-title">剧照</view>
 			<scroll-view scroll-x class="scroll-list">
-				<image v-for="(img, imgIndex) in plotPicsArray" 
-				:src="img"
-				 mode="aspectFit"
-				 class="plot-image"
-				  @click="lookme"
+				<image v-for="(img, imgIndex) in plotPicsArray" :src="img" mode="aspectFit" class="plot-image" @click="lookme"
 				 :data-imageIndex="imgIndex"></image>
 			</scroll-view>
 		</view>
@@ -99,7 +87,21 @@
 				trailerInfo: {},
 				plotPicsArray: [], //剧照
 				directorArray: [], //导演列表
-				actorArray: [] //演员列表
+				actorArray: [] ,//演员列表
+			}
+		},
+		
+		onReady() {
+			this.videoContext = uni.createVideoContext('myTrailer');
+			
+		},
+		onHide() {
+			//页面被隐藏的时候，暂停播放
+			this.videoContext.pause();
+		},
+		onShow() {
+			if (this.videoContext) {
+				this.videoContext.play();
 			}
 		},
 		onLoad(params) {
@@ -156,14 +158,38 @@
 				}
 			});
 		},
-		
+
+		//监听导航栏的按钮
+		onNavigationBarButtonTap: (e) => {
+			var me = this;
+			var index = e.index;
+			console.log("tap button:" + index);
+			var trialerInfo = me.trailerInfo;
+			var trailderID = trialerInfo.id;
+			var trailerName = trialerInfo.name;
+			var cover = trailerInfo.cover;
+			var poster = trailerInfo.poster;
+			var desc = trailerInfo.plotDesc;
+			uni.share({
+				provider: "weixin",
+				scene: "WXSenceTimeline",
+				type: 0,
+				href: "http://www.imovietrailer.com/#/pages/movie/movie?trailerId=" + trailderID,
+				title: trailerName,
+				summary: desc,
+				imageUrl: cover,
+				success: (res) => {
+					console.log("分享成功" + res);
+				}
+			})
+		},
 		//只支持在小程序端，分享到微信群或者微信好友
 		onShareAppMessage: (res) => {
-				var me = this;
-				return {
-					title:me.trailerInfo.name,
-					path:'/pages/movie/movie?trailerId=' + me.trailerInfo.id
-				};
+			var me = this;
+			return {
+				title: me.trailerInfo.name,
+				path: '/pages/movie/movie?trailerId=' + me.trailerInfo.id
+			};
 		},
 		methods: {
 			// 查看剧照的图片预览
@@ -174,7 +200,7 @@
 				uni.previewImage({
 					urls: plotPicsArray,
 					// current: imageindex,
-					current:plotPicsArray[imageindex]
+					current: plotPicsArray[imageindex]
 				});
 			},
 			// 查看演职表的图片预览
@@ -183,7 +209,7 @@
 				var staffIndex = e.currentTarget.dataset.staffindex;
 				//拼接导演和演员的数组 成为新数组
 				var staffArray = me.directorArray.concat(me.actorArray);
-				
+
 				var urls = [];
 				for (var i = 0; i < staffArray.length; i++) {
 					var tempPhoto = staffArray[i].photo;
