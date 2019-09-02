@@ -1,0 +1,156 @@
+.player {
+	display: flex;
+	justify-content: center;
+	background-color: black;
+}
+
+.movie{
+	width: 100%;
+	height: 440upx;
+	
+}
+
+/* 基本信息 */
+.movie-info {
+	display: flex;
+	flex-direction: row;
+	background-color: #f7f4f9;
+	padding: 40upx 20upx;
+}
+.cover {
+	width: 280upx;
+	height: 380upx;
+}
+
+.movie-desc {
+	display: flex;
+	flex-direction: column;
+	margin-left: 30upx;
+	width: 400upx;
+}
+
+.title {
+	font-size: 30px;
+}
+
+.basic-info {
+	color: darkgray;
+	font-size: 13px;
+	line-height: 36upx;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* 评分 */
+.score-block {
+	background-color: white;
+	margin-top: 20upx;
+	width: 360upx;
+	height: 90upx;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 20upx;
+	/* 阴影效果 */
+	box-shadow: 3px 2px 10px #dedede;
+}
+
+.big-score {
+	display: flex;
+	flex-direction: column;
+}
+
+.score-words {
+	font-size: 12px;
+	color: gray;
+}
+
+.movie-score {
+	font-size: 24px;
+	font-weight: bold;
+	margin-left: 8upx;
+	color: orange;
+}
+
+.score-stars {
+	margin-left: 10upx;
+}
+
+.prise-counts {
+	font-size: 12px;
+	color: gray;
+	line-height: 44upx;
+}
+
+.plots-block {
+	background-color: #f7f4f9;
+	padding: 20upx 40upx;
+}
+
+.plots-title {
+	font-size: 14px;
+	color: gray;
+}
+
+.plots-desc {
+	margin-top: 10upx;
+	font-size: 16px;
+}
+
+/* 分割线 */
+.line-wapper {
+	padding: 0px 20upx;
+}
+
+.line {
+	height: 1px;
+	background-color: #DBDBDA;
+}
+/* 演职人员 */
+.single-actor {
+	width: 170upx;
+	height: 240upx;
+	margin-right: 10upx;
+}
+
+/* 剧照 */
+.scroll-block {
+	background-color: #f7f4f9;
+	padding: 20upx 40upx;
+}
+
+.scroll-list {
+	width: 100%;
+	white-space: nowrap;
+	margin-top: 20upx;
+}
+
+.actor-wapper {
+	display: inline-block;
+}
+
+.plot-image {
+	width: 220upx;
+	height: 320upx;
+	margin-right: 10upx;
+}
+
+.actor-name {
+	width: 170upx;
+	font-size: 15upx;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.actor-role {
+	width: 170upx;
+	font-size: 13upx;
+	color: #A9A9A9;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

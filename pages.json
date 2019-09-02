@@ -6,8 +6,8 @@
 				"app-plus": {
 					"titleNView": false //禁用原生导航栏
 				},
-				"enablePullDownRefresh":true//页面开启下拉刷新功能
-				
+				"enablePullDownRefresh": true //页面开启下拉刷新功能
+
 			}
 		}, {
 			"path": "pages/search/search",
@@ -17,12 +17,30 @@
 		}, {
 			"path": "pages/me/me",
 			"style": {}
+		}, {
+			"path": "pages/movie/movie",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						// 渐进式的导航栏
+						"type": "transparent",
+						"backgroundColor":"#000000",
+						"titleColor":"#FFFFFF"
+					}
+				},
+				"navigationBarTitleText":"电影",
+				"navigationBarBackgroundColor":"#000000",
+				"navigationBarTextStyle":"white"
+			}
+		}, {
+			"path": "pages/cover/cover",
+			"style": {
+				"navigationBarTitleText":"封面",
+				"navigationBarBackgroundColor":"#000000",
+				"navigationBarTextStyle":"white"
+			}
 		}
-	    ,{
-            "path" : "pages/movie/movie",
-            "style" : {}
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "NEXT超英预告",

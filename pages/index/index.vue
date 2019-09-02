@@ -61,7 +61,7 @@
 					<view class="movie-title">
 						{{guess.name}}
 					</view>
-					<trailer-starts :innerScore="9.1" showNum="0"></trailer-starts>
+					<trailer-starts :innerScore="guess.score" showNum="0"></trailer-starts>
 					<view class="movie-info">
 						{{guess.basicInfo}}
 					</view>
