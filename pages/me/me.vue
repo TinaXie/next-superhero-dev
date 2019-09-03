@@ -19,7 +19,9 @@
 			</view>
 			
 			<view class="set-wapper" v-if="userIsLogin">
-				<image src="/static/icos/settings.png" class="settings"></image>
+				<image src="/static/icos/settings.png"
+				 class="settings"
+				 @click="goToMeInfo"></image>
 			</view>
 		</view>
 	</view>
@@ -39,7 +41,9 @@
 		},
 		onShow() {
 			var me = this;
-			var userInfo = uni.getStorageSync("globalUser");
+			
+			// 使用挂载方法获取用户数据
+			var userInfo = me.getGlobalUser();
 			if (userInfo != null && userInfo != "" && userInfo != undefined) {
 				me.userInfo = userInfo;
 				me.userIsLogin = true;
@@ -48,7 +52,11 @@
 			}
 		},
 		methods: {
-
+			goToMeInfo(){
+				uni.navigateTo({
+					url:"../meInfo/meInfo"
+				});
+			}
 		}
 	}
 </script>

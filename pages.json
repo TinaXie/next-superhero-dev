@@ -62,6 +62,10 @@
 				"navigationBarTitleText": "注册登录"
 			}
         }
+        ,{
+            "path" : "pages/meInfo/meInfo",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

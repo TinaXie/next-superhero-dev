@@ -66,6 +66,12 @@
 							uni.switchTab({
 								url:"../me/me"
 							});
+						} else if(res.data.status == 500){
+							uni.showToast({
+								title:res.data.msg,
+								duration:2000,
+								image:"/static/icos/error.png"
+							});
 						}
 					},
 					complete: () => {
