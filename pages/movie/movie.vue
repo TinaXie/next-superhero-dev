@@ -114,7 +114,7 @@
 			});
 			uni.showNavigationBarLoading();
 			uni.request({
-				url: me.serverURL + '/search/trailer/' + trailerId + '?qq=843002185',
+				url: me.serverURL + '/search/trailer/' + trailerId + '?&qq=843002185',
 				method: 'POST',
 				data: {},
 				success: res => {

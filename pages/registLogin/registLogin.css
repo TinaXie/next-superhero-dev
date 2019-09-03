@@ -45,3 +45,55 @@
 button::after{
 	border: none;
 }
+
+/* 第三方登录 */
+.third-wapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	
+	margin-top: 60upx;
+}
+
+.third-line {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.single-line {
+	padding: 25upx 20upx;
+	align-items: center;
+	width: 25%;
+}
+.line {
+	height: 1px;
+	background-color: #A9A9A9;
+}
+.third-words {
+	color: #A9A9A9;
+	font-size: 13px;
+}
+
+.third-icons-wapper {
+	margin-top: 30upx;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.third-icon {
+	width: 60upx;
+	height: 60upx;
+}
+
+.third-btn-ico {
+	background-image:url(http://122.152.205.72:88/group1/M00/00/05/CpoxxFxFO-yAOjTaAAATCIZEzRU503.png);
+	width: 60upx;
+	height: 60upx;
+	background-color: white;
+	background-size: 60upx 60upx;
+	background-repeat:no-repeat;
+	border:none;
+	padding: 0;
+}

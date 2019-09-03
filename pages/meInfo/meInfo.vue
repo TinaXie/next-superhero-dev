@@ -106,7 +106,41 @@
 							});
 						}
 					}
-				})
+				});
+			},
+			operator(){
+				var me = this;
+				var globalUser = me.getGlobalUser()
+				uni.showActionSheet({
+					itemList:["查看我的头像", "从相册选择上传"],
+					success: (res) => {
+						var index = res.tapIndex;
+						if (index == 0) {
+							// 查看我的头像
+							var faceArr = [];
+							faceArr.push(globalUser.faceImage);
+							uni.previewImage({
+								urls:faceArr,
+								current:faceArr[0]
+							});
+						} else {
+							//从相册选择上传
+							uni.chooseImage({
+								count:1,
+								sizeType:["compressed"],
+								sourceType:["album"],
+								success: (res) => {
+									// 获得临时路径
+									var tempFilePath = res.tempFilePaths[0];
+									
+									uni.navigateTo({
+										url:"../meface/meface?tempFilePath=" + tempFilePath
+									});
+								}
+							});
+						}
+					}
+				});
 			}
 		}
 	}

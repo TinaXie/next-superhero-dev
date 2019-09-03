@@ -64,7 +64,19 @@
         }
         ,{
             "path" : "pages/meInfo/meInfo",
-            "style" : {}
+            "style" : {
+				"navigationBarTextStyle" : "white",
+				"navigationBarTitleText" : "我的",
+				"navigationBarBackgroundColor" : "#ffd655"
+			}
+        }
+        ,{
+            "path" : "pages/meface/meface",
+            "style" : {
+				"navigationBarTextStyle" : "white",
+				"navigationBarTitleText" : "头像上传",
+				"navigationBarBackgroundColor" : "#000000"
+			}
         }
     ],
 	"globalStyle": {
