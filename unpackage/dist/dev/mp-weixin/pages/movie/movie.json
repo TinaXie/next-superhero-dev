@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "电影",
-  "navigationBarBackgroundColor": "#000000",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {
-    "trailer-starts": "/components/trailerStars"
-  }
-}

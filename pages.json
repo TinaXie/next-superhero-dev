@@ -16,7 +16,14 @@
 			}
 		}, {
 			"path": "pages/me/me",
-			"style": {}
+			"style": {
+				"app-plus": {
+					"titleNView": false //禁用原生导航栏
+				},
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText":"我的",
+				"navigationBarBackgroundColor":"#ffd655"
+			}
 		}, {
 			"path": "pages/movie/movie",
 			"style": {
@@ -25,32 +32,37 @@
 						// 渐进式的导航栏
 						"type": "transparent",
 						//定义导航栏按钮
-						"buttons":[
-							{
-								"type":"home"
-								
+						"buttons": [{
+								"type": "home"
+
 							},
 							{
-								"type":"share"
-								
+								"type": "share"
+
 							}
 						]
-						
+
 					}
 				},
-				"navigationBarTitleText":"电影",
-				"navigationBarBackgroundColor":"#000000",
-				"navigationBarTextStyle":"white"
+				"navigationBarTitleText": "电影",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
 			}
 		}, {
 			"path": "pages/cover/cover",
 			"style": {
-				"navigationBarTitleText":"封面",
-				"navigationBarBackgroundColor":"#000000",
-				"navigationBarTextStyle":"white"
+				"navigationBarTitleText": "封面",
+				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTextStyle": "white"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/registLogin/registLogin",
+            "style" : {
+				"navigationBarTitleText": "注册登录"
+			}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "NEXT超英预告",

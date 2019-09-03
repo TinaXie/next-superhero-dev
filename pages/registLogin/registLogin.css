@@ -1,0 +1,47 @@
+.body {
+	border-top: solid 1px #DBDBDA;
+	padding: 0 40upx;
+}
+
+.face-wapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	
+	margin-top: 120upx;
+	margin-bottom: 120upx;
+}
+
+.face {
+	width: 120upx;
+	height: 120upx;
+}
+
+.info-wapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	border-bottom: solid 1px #DBDBDA;
+	padding-bottom: 20upx;
+	margin-top: 40upx;
+}
+
+.words-lbl {
+	color: #808080;
+}
+
+.input {
+	width: 500upx;
+	margin-left: 20upx;
+}
+.graywords {
+	color: #EAEAEA;
+}
+.loginbutton {
+	margin-top: 60px;
+	width: 90%;
+}
+
+button::after{
+	border: none;
+}

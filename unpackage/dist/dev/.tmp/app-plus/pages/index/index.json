@@ -1,7 +1,0 @@
-{
-  "enablePullDownRefresh": true,
-  "titleNView": false,
-  "usingComponents": {
-    "trailer-starts": "/components/trailerStars"
-  }
-}
