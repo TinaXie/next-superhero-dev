@@ -5,7 +5,7 @@ Vue.config.productionTip = false
 
 //挂在变量
 Vue.prototype.serverURL = "https://www.imovietrailer.com/superhero"
-Vue.prototype.serverQQ = "&qq=843002185"
+Vue.prototype.serverQQ = "&qq=3195931798"
 
 Vue.prototype.getGlobalUser = function(){
 	var userInfo = uni.getStorageSync("globalUser");
