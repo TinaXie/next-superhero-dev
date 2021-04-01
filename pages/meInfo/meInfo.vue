@@ -89,7 +89,7 @@
 			logout(){
 				var me = this;
 				uni.request({
-					url:me.serverURL + "/user/logout?&qq=843002185&userId=" + me.globalUser.id,
+					url:me.serverURL + "/user/logout?&userId=" + me.globalUser.id + me.serverQQ,
 					method:"POST",
 					success: (res) => {
 						if(res.data.status == 200){

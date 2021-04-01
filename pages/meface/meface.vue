@@ -58,7 +58,7 @@
 				
 				console.log("===111====" + me.tempFace);
 				uni.uploadFile({
-					url:me.serverURL+"/user/uploadFace?userId=" + globalUser.id + "&qq=843002185",
+					url:me.serverURL+"/user/uploadFace?userId=" + globalUser.id + me.serverQQ,
 					filePath:me.tempFace,
 					name:"file",
 					header:{

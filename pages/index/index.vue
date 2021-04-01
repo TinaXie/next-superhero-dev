@@ -116,7 +116,7 @@
 			var me = this;
 			//请求轮播图数据
 			uni.request({
-				url: me.serverURL + '/index/carousel/list?&qq=843002185',
+				url: me.serverURL + '/index/carousel/list?' + me.serverQQ,
 				method: "POST",
 				success: (res) => {
 					if (res.data.status == 200) {
@@ -128,7 +128,7 @@
 
 			//请求热门超英
 			uni.request({
-				url: me.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
+				url: me.serverURL + '/index/movie/hot?&type=superhero' + me.serverQQ,
 				method: "POST",
 				success: (res) => {
 					if (res.data.status == 200) {
@@ -138,7 +138,7 @@
 			});
 			//请求热门预告
 			uni.request({
-				url: me.serverURL + '/index/movie/hot?&qq=843002185&type=superhero',
+				url: me.serverURL + '/index/movie/hot?5&type=superhero' + me.serverQQ,
 				method: "POST",
 				success: (res) => {
 					if (res.data.status == 200) {
@@ -180,7 +180,7 @@
 				
 				//请求猜你喜欢
 				uni.request({
-					url:me.serverURL + '/index/guessULike?qq=843002185',
+					url:me.serverURL + '/index/guessULike?' + me.serverQQ,
 					method:"POST",
 					success: (res) => {
 						if (res.data.status == 200) {

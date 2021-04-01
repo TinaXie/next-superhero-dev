@@ -114,7 +114,7 @@
 			});
 			uni.showNavigationBarLoading();
 			uni.request({
-				url: me.serverURL + '/search/trailer/' + trailerId + '?&qq=843002185',
+				url: me.serverURL + '/search/trailer/' + trailerId + me.serverQQ,
 				method: 'POST',
 				data: {},
 				success: res => {
@@ -134,7 +134,7 @@
 			});
 			// 获取导演 /1
 			uni.request({
-				url: me.serverURL + '/search/staff/' + trailerId + '/1' + '?qq=843002185',
+				url: me.serverURL + '/search/staff/' + trailerId + '/1?' + me.serverQQ,
 				method: 'POST',
 				data: {},
 				success: res => {
@@ -147,7 +147,7 @@
 
 			// 获取演员 /2
 			uni.request({
-				url: me.serverURL + '/search/staff/' + trailerId + '/2' + '?qq=843002185',
+				url: me.serverURL + '/search/staff/' + trailerId + '/2?' + me.serverQQ,
 				method: 'POST',
 				data: {},
 				success: res => {
